@@ -1,9 +1,4 @@
-const CreateNote = ({ handleModal, formData, handleChange }) => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleModal();
-  };
-
+const CreateNote = ({ handleSubmit, formData, handleChange }) => {
   return (
     <div className='form-container'>
       <form onSubmit={handleSubmit}>

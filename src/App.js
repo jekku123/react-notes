@@ -23,6 +23,7 @@ class App extends Component {
     this.deleteNote = this.deleteNote.bind(this);
     this.submitNote = this.submitNote.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleModal() {
@@ -36,6 +37,11 @@ class App extends Component {
     this.setState({
       notes: newNotes,
     });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.handleModal();
   }
 
   submitNote() {
@@ -66,7 +72,7 @@ class App extends Component {
     return (
       <main>
         <CreateNote
-          handleModal={this.handleModal}
+          handleSubmit={this.handleSubmit}
           formData={this.state.formData}
           handleChange={this.handleChange}
         />
