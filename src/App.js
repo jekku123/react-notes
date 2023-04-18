@@ -64,28 +64,22 @@ class App extends Component {
 
   render() {
     return (
-      <div className='App'>
-        <main>
-          <section className='upper'>
-            <CreateNote
-              handleModal={this.handleModal}
-              formData={this.state.formData}
-              handleChange={this.handleChange}
-            />
-            <Preview formData={this.state.formData} />
-          </section>
-          <section>
-            <Notes notes={this.state.notes} deleteNote={this.deleteNote} />
-          </section>
-          {this.state.isOpen && (
-            <Modal
-              formData={this.state.formData}
-              handleModal={this.handleModal}
-              submitNote={this.submitNote}
-            />
-          )}
-        </main>
-      </div>
+      <main>
+        <CreateNote
+          handleModal={this.handleModal}
+          formData={this.state.formData}
+          handleChange={this.handleChange}
+        />
+        <Preview formData={this.state.formData} />
+        <Notes notes={this.state.notes} deleteNote={this.deleteNote} />
+        {this.state.isOpen && (
+          <Modal
+            formData={this.state.formData}
+            handleModal={this.handleModal}
+            submitNote={this.submitNote}
+          />
+        )}
+      </main>
     );
   }
 }

@@ -10,24 +10,6 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
-main {
-  padding: 50px;
-}
-
-.upper {
-  display: flex;
-  gap: 50px;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-form div {
-  margin: 5px 0px;
-}
-
 label {
   display: block;
 }
