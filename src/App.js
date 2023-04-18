@@ -39,11 +39,6 @@ class App extends Component {
     });
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-    this.handleModal();
-  }
-
   submitNote() {
     this.setState((prevState) => ({
       notes: [
@@ -61,6 +56,10 @@ class App extends Component {
     this.handleModal();
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+    this.handleModal();
+  }
   handleChange({ target }) {
     const { name, value } = target;
     this.setState((prevState) => ({
