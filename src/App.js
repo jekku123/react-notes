@@ -25,20 +25,20 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleModal = () => {
+  handleModal() {
     this.setState((prevState) => ({
       isOpen: !prevState.isOpen,
     }));
-  };
+  }
 
-  deleteNote = (id) => {
+  deleteNote(id) {
     const newNotes = this.state.notes.filter((note) => note.id !== id);
     this.setState({
       notes: newNotes,
     });
-  };
+  }
 
-  submitNote = () => {
+  submitNote() {
     this.setState((prevState) => ({
       notes: [
         ...prevState.notes,
@@ -53,14 +53,14 @@ class App extends Component {
       ],
     }));
     this.handleModal();
-  };
+  }
 
-  handleChange = ({ target }) => {
+  handleChange({ target }) {
     const { name, value } = target;
     this.setState((prevState) => ({
       formData: { ...prevState.formData, [name]: value },
     }));
-  };
+  }
 
   render() {
     return (
