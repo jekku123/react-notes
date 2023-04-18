@@ -60,6 +60,7 @@ class App extends Component {
     e.preventDefault();
     this.handleModal();
   }
+
   handleChange({ target }) {
     const { name, value } = target;
     this.setState((prevState) => ({
