@@ -35,25 +35,24 @@ class App extends Component {
   }
 
   fetchGetRequest = async () => {
+    let data = [];
     try {
       const res = await fetch('http://localhost:4001/notes');
-      if (res.ok) {
-        const data = await res.json();
-        this.setState({ data });
-      }
+      data = await res.json();
     } catch (error) {
       console.log('ERROR: ' + error);
     }
+    this.setState({ data });
   };
 
-  fetchPostRequest = async (note) => {
+  fetchPostRequest = async (data) => {
     try {
       await fetch('http://localhost:4001/notes', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(note),
+        body: JSON.stringify(data),
       });
     } catch (error) {
       console.log('Failed to post a note \n' + error);
