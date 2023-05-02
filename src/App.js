@@ -34,20 +34,30 @@ class App extends Component {
     }
   }
 
-  fetchGetRequest = () => {
-    fetch('http://localhost:4001/notes')
-      .then((res) => res.json())
-      .then((data) => this.setState({ data }));
+  fetchGetRequest = async () => {
+    try {
+      const res = await fetch('http://localhost:4001/notes');
+      if (res.ok) {
+        const data = await res.json();
+        this.setState({ data });
+      }
+    } catch (error) {
+      console.log('ERROR: ' + error);
+    }
   };
 
-  fetchPostRequest = (note) => {
-    fetch('http://localhost:4001/notes', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(note),
-    });
+  fetchPostRequest = async (note) => {
+    try {
+      await fetch('http://localhost:4001/notes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(note),
+      });
+    } catch (error) {
+      console.log('Failed to post a note \n' + error);
+    }
   };
 
   handleModal = (modal) => {
