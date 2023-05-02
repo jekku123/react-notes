@@ -5,6 +5,7 @@
 }
 
 body {
+  padding: 20px;
   background-color: #262626;
   color: white;
   font-family: 'Montserrat', sans-serif;
@@ -23,6 +24,11 @@ select {
   width: 200px;
   resize: none;
   outline: none;
+}
+
+section {
+  display: flex;
+  flex-direction: row;
 }
 
 button {

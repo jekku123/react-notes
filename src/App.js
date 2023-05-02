@@ -1,16 +1,73 @@
 import './App.css';
 import { Component } from 'react';
-import CreateNote from './CreateNote';
+
+import Form from './Form';
 import Modal from './Modal';
 import Preview from './Preview';
 import Notes from './Notes';
+import PreviewModal from './PreviewModal';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      notes: [],
-      isOpen: false,
+  state = {
+    updates: 0,
+    isOpen: {
+      previewModal: false,
+      updateModal: false,
+    },
+    formData: {
+      firstname: '',
+      lastname: '',
+      phone: '',
+      role: '',
+      message: '',
+    },
+    data: [],
+  };
+
+  componentDidMount() {
+    this.fetchGetRequest();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.updates !== prevState.updates) {
+      this.fetchGetRequest();
+    }
+  }
+
+  fetchGetRequest = () => {
+    fetch('http://localhost:4001/notes')
+      .then((res) => res.json())
+      .then((data) => this.setState({ data }));
+  };
+
+  fetchPostRequest = (note) => {
+    fetch('http://localhost:4001/notes', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(note),
+    });
+  };
+
+  handleModal = (modal) => {
+    this.setState((prevState) => ({
+      isOpen: {
+        ...prevState.isOpen,
+        [modal]: !prevState.isOpen[modal],
+      },
+    }));
+  };
+
+  deleteNote = (id) => {
+    // this.setState({
+    //   notes: this.state.notes.filter((note) => note.id !== id),
+    // });
+  };
+
+  createNote = () => {
+    this.fetchPostRequest({ id: crypto.randomUUID(), ...this.state.formData });
+    this.setState({
       formData: {
         firstname: '',
         lastname: '',
@@ -18,72 +75,43 @@ class App extends Component {
         role: '',
         message: '',
       },
-    };
-    this.handleModal = this.handleModal.bind(this);
-    this.deleteNote = this.deleteNote.bind(this);
-    this.submitNote = this.submitNote.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleModal() {
-    this.setState((prevState) => ({
-      isOpen: !prevState.isOpen,
-    }));
-  }
-
-  deleteNote(id) {
-    const newNotes = this.state.notes.filter((note) => note.id !== id);
-    this.setState({
-      notes: newNotes,
+      updates: this.state.updates + 1,
     });
-  }
+    this.handleModal('previewModal');
+  };
 
-  submitNote() {
-    this.setState((prevState) => ({
-      notes: [
-        ...prevState.notes,
-        {
-          id: crypto.randomUUID(),
-          firstname: this.state.formData.firstname,
-          lastname: this.state.formData.lastname,
-          phone: this.state.formData.phone,
-          role: this.state.formData.role,
-          message: this.state.formData.message,
-        },
-      ],
-    }));
-    this.handleModal();
-  }
-
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     e.preventDefault();
-    this.handleModal();
-  }
+    this.handleModal('previewModal');
+  };
 
-  handleChange({ target }) {
+  handleChange = ({ target }) => {
     const { name, value } = target;
     this.setState((prevState) => ({
       formData: { ...prevState.formData, [name]: value },
     }));
-  }
+  };
 
   render() {
     return (
       <main>
-        <CreateNote
-          handleSubmit={this.handleSubmit}
-          formData={this.state.formData}
-          handleChange={this.handleChange}
-        />
-        <Preview formData={this.state.formData} />
-        <Notes notes={this.state.notes} deleteNote={this.deleteNote} />
-        {this.state.isOpen && (
-          <Modal
+        <section>
+          <Form
             formData={this.state.formData}
-            handleModal={this.handleModal}
-            submitNote={this.submitNote}
+            handleSubmit={this.handleSubmit}
+            handleChange={this.handleChange}
           />
+          <Preview formData={this.state.formData} />
+        </section>
+        <Notes notes={this.state.data} deleteNote={this.deleteNote} />
+        {this.state.isOpen.previewModal && (
+          <Modal>
+            <PreviewModal
+              formData={this.state.formData}
+              closeModal={() => this.handleModal('previewModal')}
+              createNote={this.createNote}
+            />
+          </Modal>
         )}
       </main>
     );

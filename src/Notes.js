@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Notes = ({ notes, deleteNote }) => {
   return (
     <div className='notes'>

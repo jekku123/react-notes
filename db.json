@@ -1,0 +1,36 @@
+{
+  "notes": [
+    {
+      "id": 1,
+      "firstname": "Jesse",
+      "lastname": "Manninen",
+      "phone": "0405100040",
+      "role": "Master",
+      "message": "Hella world"
+    },
+    {
+      "id": "6f9531a3-cf2c-4520-8abf-bafe1fde1a5a",
+      "firstname": "asd",
+      "lastname": "",
+      "phone": "",
+      "role": "",
+      "message": ""
+    },
+    {
+      "id": "82b0d682-93a4-4024-9b59-998fa86e8de7",
+      "firstname": "asd",
+      "lastname": "asd",
+      "phone": "23",
+      "role": "",
+      "message": ""
+    },
+    {
+      "id": "5315c94d-e20f-4b61-a726-5871fb7a5325",
+      "firstname": "adsdada",
+      "lastname": "dasdda",
+      "phone": "",
+      "role": "",
+      "message": "adsdasdas"
+    }
+  ]
+}

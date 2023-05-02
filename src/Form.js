@@ -1,4 +1,4 @@
-const CreateNote = ({ handleSubmit, formData, handleChange }) => {
+const Form = ({ handleSubmit, handleChange, formData }) => {
   return (
     <div className='form-container'>
       <form onSubmit={handleSubmit}>
@@ -63,4 +63,4 @@ const CreateNote = ({ handleSubmit, formData, handleChange }) => {
   );
 };
 
-export default CreateNote;
+export default Form;
